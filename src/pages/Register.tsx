@@ -1,32 +1,61 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, SafeAreaView, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import abacateRostoImg from '../assets/abacate_icon.png';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
+import { Ionicons } from '@expo/vector-icons';
+import { Button } from '../components/Button';
 
 
 
 export function Register(){
+
+    const [input,setInput] = useState('');
+    const [hidePass, setHidePass]= useState(false);
+
+
+
     return(
         <SafeAreaView style={styles.container}>
+            
+            
+           
             <View>
+            <Text style={styles.cancel}>Cancelar</Text>
                 <Image source={abacateRostoImg} style={styles.image}></Image>
-                <Text style={styles.title}>teste {'\n'}começar</Text>
+                <Text style={styles.title}>Crie sua conta</Text>
             </View >
             <View style={styles.form}>
+                <TextInput style={styles.input} placeholder='Nome do Usuário' />
                 <TextInput style={styles.input} placeholder='Email' />
-                <TextInput style={styles.input} placeholder='Senha' />
+                
+                <View style={styles.inputArea}>
+                <TextInput style={styles.password} placeholder='Senha'
+                value={input}
+                onChangeText={(texto) =>setInput(texto)}
+                secureTextEntry={hidePass}
+                 />
 
+                <TouchableOpacity style={styles.icon}
+                onPress={()=> setHidePass(!hidePass)}>
+                    {hidePass ?
+                <Ionicons name="eye" color="#000" size={25}/> 
+                :
+                <Ionicons name="eye-off" color="#000" size={25}/>
+            }           
+                    </TouchableOpacity>
                 </View>
 
-                <View >
-                <TouchableOpacity style={styles.circle}>
-                <Text style={styles.text}>APERTAR</Text>
-                </TouchableOpacity>
+                </View>
+                
+                <View style={styles.button}>
+                <Button
+                title={'Cadastrar'}
+                />
 
                
                 <View>
-                    <Text style={styles.remember}>jA POSSUO CADASTRO</Text>
+                    <Text style={styles.remember}>Já tenho uma conta</Text>
                 </View>
             </View>
             
@@ -49,7 +78,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.title
     },
     image:{
-        marginTop:80,
+        
         alignSelf:'center'
     },
     form:{
@@ -65,23 +94,15 @@ const styles = StyleSheet.create({
     input:{
         backgroundColor: 'white',
         width: '100%',
-        borderColor: '#e8e8e8',
+        borderColor: colors.green_light,
         borderWidth: 1,
         borderRadius: 5,
-        paddingHorizontal: 150,
+        paddingHorizontal: 10,
         paddingVertical:10,
         marginVertical: 10,
         textAlign:'left'
     },
-    circle:{
-        marginVertical:10,
-        backgroundColor:colors.green_light,
-        width:327,
-        height:53,
-        borderRadius:16,
-        justifyContent:"center",
-        alignItems:'center'
-    },
+    
     text:{
         fontSize:18,
         color:colors.white,
@@ -89,10 +110,47 @@ const styles = StyleSheet.create({
     },
 
     remember:{
-        marginVertical:50,
+        marginVertical:10,
         fontFamily:fonts.button_no_border,
         textDecorationLine:'underline',
-        textDecorationColor: colors.green_light
+        textDecorationColor: colors.green_light,
+        textAlign:'center'
+        
+
+    },
+    cancel:{
+        fontFamily:fonts.button_no_border,
+        marginRight:300,
+        marginTop:60
+    },
+    password:{
+        width:"85%",
+       
+        
+    },
+    icon:{
+        width:'15%',
+        justifyContent:'center',
+        alignItems:"center"
+    },
+    inputArea:{
+        flexDirection: 'row',
+        width:'100%',
+        backgroundColor:colors.white,
+        borderRadius: 5,
+        borderColor: colors.green_light,
+        borderWidth:1,
+        paddingHorizontal:10,
+        paddingVertical:10,
+        marginVertical: 10,
+        alignItems:'center',
+       
+    },
+    button:{
+        width:327,
+        height:53,
+        position:'absolute',
+        marginTop:500
 
     }
  
