@@ -5,6 +5,8 @@ import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Ionicons } from '@expo/vector-icons';
 import { Button } from '../components/Button';
+import { useNavigation } from '@react-navigation/native';
+import {Home} from '../pages/Home';
 
 
 
@@ -13,7 +15,11 @@ export function Register(){
     const [input,setInput] = useState('');
     const [hidePass, setHidePass]= useState(false);
 
+    const navigation = useNavigation();
 
+    function handleStart(){
+        navigation.navigate('Home');
+    }
 
     return(
         <SafeAreaView style={styles.container}>
@@ -51,6 +57,7 @@ export function Register(){
                 <View style={styles.button}>
                 <Button
                 title={'Cadastrar'}
+                onPress={handleStart}
                 />
 
                
