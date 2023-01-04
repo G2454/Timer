@@ -18,23 +18,22 @@ import fonts from '../styles/fonts';
 import { getPadTime } from '../components/getPadTime';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Ionicons } from '@expo/vector-icons'; 
-import vovojojo1 from '../assets/Vovojuju1.png';
+import vovojuju2 from '../assets/Vovojuju2.png';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet from '../components/BottomSheet';
 import { useNavigation } from '@react-navigation/native';
-import { Surrender } from './Surrender';
+import { SurrenderCard2 } from './SurrenderCard2';
 
 
 
 
-
-export function Home(){
+export function Home2(){
 
     const navigation = useNavigation();
         
 
     function portal3(){
-        navigation.navigate('Surrender');
+        navigation.navigate('SurrenderCard2');
     }
 
     const [range, setRange] = useState(0);
@@ -47,8 +46,7 @@ export function Home(){
 
     const minutes = getPadTime(Math.floor((timeLeft/60)));
     const seconds = getPadTime(timeLeft-minutes*60);
-
- 
+    
     useEffect(() =>{
         const interval = setInterval(()=>{
             isCounting &&
@@ -75,9 +73,8 @@ export function Home(){
     return(
         <GestureHandlerRootView style={{flex: 1}}>
            
-        <SafeAreaView style={styles.container} 
-        >
-        <View style={styles.abacate_Around}>
+        <SafeAreaView style={styles.container} >
+<View style={styles.abacate_Around}>
             <TouchableOpacity onPress={portal3}>
              <Image source={abacateRostoImg}></Image>
              </TouchableOpacity>
@@ -86,7 +83,7 @@ export function Home(){
         
         
         <View>
-            <Image source={vovojojo1}></Image>
+            <Image source={vovojuju2}></Image>
         </View>
         
         <View style={styles.controls}>
@@ -112,9 +109,8 @@ export function Home(){
                 </View>
                   
             </View>
-            
             <BottomSheet />
-            
+
 </SafeAreaView>
        </GestureHandlerRootView>
   )
