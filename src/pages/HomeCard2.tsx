@@ -52,12 +52,6 @@ export function HomeCard2(){
 
     const [timeLeft, setTimeLeft] = useState(range);
 
-    useEffect(()=>{
-        setTimeLeft(range);
-    },[range])
-    
-
-
     const [isCounting, setIsCounting] = useState(false);
 
     const minutes = getPadTime(Math.floor((timeLeft/60)));
