@@ -3,11 +3,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {Login} from '../pages/Login';
 import {Register} from '../pages/Register';
 import {Home} from '../pages/Home';
-import {Home2} from '../pages/HomeCard2';
-import {Home3} from '../pages/HomeCard3';
+import {HomeCard2} from '../pages/HomeCard2';
+import {HomeCard3} from '../pages/HomeCard3';
+import {BackAvocado} from '../pages/BackAvocado';
+import {BackAvocadoCard2} from '../pages/BackAvocadoCard2';
+import {BackAvocadoCard3} from '../pages/BackAvocadoCard3';
 import {Surrender} from '../pages/Surrender';
-import {SurrenderCard2} from '../pages/SurrenderCard2';
-import {SurrenderCard3} from '../pages/SurrenderCard3';
+import { SurrenderCard2 } from '../pages/SurrenderCard2';
+import { SurrenderCard3 } from '../pages/SurrenderCard3';
+import { teste } from '../pages/teste';
 
 
 
@@ -37,12 +41,24 @@ const AppRoutes: React.FC = () =>(
             component={Home}
         />
         <stackRoutes.Screen
-            name="Home2"
-            component={Home2}
+            name="HomeCard2"
+            component={HomeCard2}
         />
         <stackRoutes.Screen
-            name="Home3"
-            component={Home3}
+            name="HomeCard3"
+            component={HomeCard3}
+        />
+        <stackRoutes.Screen
+            name="BackAvocado"
+            component={BackAvocado}
+        />
+        <stackRoutes.Screen
+            name="BackAvocadoCard2"
+            component={BackAvocadoCard2}
+        />
+        <stackRoutes.Screen
+            name="BackAvocadoCard3"
+            component={BackAvocadoCard3}
         />
         <stackRoutes.Screen
             name="Surrender"
@@ -55,6 +71,10 @@ const AppRoutes: React.FC = () =>(
         <stackRoutes.Screen
             name="SurrenderCard3"
             component={SurrenderCard3}
+        />
+        <stackRoutes.Screen
+            name="teste"
+            component={teste}
         />
     
         </stackRoutes.Navigator>

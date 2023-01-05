@@ -11,13 +11,14 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import abacate from '../assets/Abacates.png'
+import abacate from '../assets/surrender.png'
 import colors from '../styles/colors';
 import { CardStyleInterpolators } from '@react-navigation/stack';
 import fonts from '../styles/fonts';
 import { Feather } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native';
-import {HomeCard2} from '../pages/HomeCard2';
+import {HomeCard3} from '../pages/HomeCard3';
+import { Button } from './Button';
 
     
 
@@ -26,12 +27,12 @@ const windowWidth = Dimensions.get('window').width;
 
 
 
-const UpperSheetCard2 = () => {
+const SurrenderAlertCard3 = () => {
 
   const navigation = useNavigation();
 
   function goHome(){
-    navigation.navigate('HomeCard2');
+    navigation.navigate('HomeCard3');
   }
 
   const translateY = useSharedValue(0);
@@ -60,16 +61,20 @@ const UpperSheetCard2 = () => {
     <GestureDetector gesture={gesture}>
     <Animated.View style={[styles.upperSheetContainer, rUpperSheetStyle]}>
       <TouchableNativeFeedback onPress={goHome}>
-    <View style={{alignItems:'flex-end', top:20, right:10}}>  
+    <View style={{alignItems:'flex-end', right:10, top:20}}>  
      <Feather name="x" size={32} color="black" />
     </View>
     </TouchableNativeFeedback>
-      <View style={{justifyContent:'center', alignItems:'center',top:50}}>
-        <Text style={{textAlign:'left',justifyContent:'center', fontSize:40, fontFamily:fonts.title}}>Para que servem os abacates?</Text>
+      <View style={{justifyContent:'center', alignItems:'center', top:40}}>
+        <Text style={{textAlign:'left',justifyContent:'center', fontSize:40, fontFamily:fonts.title}}>Tem certeza que vai desistir bem?</Text>
     </View>
-    <View style={{paddingVertical:90, justifyContent:'center', alignItems:'center', padding:10}}>
-      <Text style={{fontSize:20, fontFamily:fonts.button_no_border}}>Além de fazer bem e deixar o cabelo bonito,{'\n'}
-os abacates servem como moedas, ou seja, a cada timer completo você ganha um, porém se nao terminar vai perder abacate bem. </Text>
+    <View style={{paddingVertical:70, justifyContent:'center', alignItems:'center', padding:10, top:10}}>
+      <Text style={{fontSize:20, fontFamily:fonts.button_no_border}}>Cuidado, se desistir vai perder um abacate.{'\n'} 
+Como assim não gosta de abacate?</Text>
+    </View>
+
+    <View style={{justifyContent:'center', alignItems:'center', flex:1, top:-10}}>
+      <Button style={styles.botao} title={'Desistir'} onPress={goHome} />
     </View>
 
     <View style={styles.bottom}>
@@ -81,7 +86,7 @@ os abacates servem como moedas, ou seja, a cada timer completo você ganha um, p
   );
 };
 
-export default UpperSheetCard2
+export default SurrenderAlertCard3
 
 const styles = StyleSheet.create({
   upperSheetContainer:{
@@ -103,6 +108,14 @@ flex: 1,
     justifyContent:'center',
     alignItems:"center"
 
+  },
+  botao:{
+    width:200,
+    height:50,
+    backgroundColor:'#E64848',
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius:25
   }
 
 

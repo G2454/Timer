@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Dimensions, Image, Touchable, TouchableOpacity} from 'react-native';
-import React, {useCallback, useEffect, useImperativeHandle} from 'react';
+import React, {useState,useCallback, useEffect, useImperativeHandle} from 'react';
 import {GestureDetector, Gesture} from 'react-native-gesture-handler';
 import Animated, {
   Extrapolate,
@@ -11,34 +11,27 @@ import Animated, {
 
 } from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
-import {Home} from '../pages/Home';
-import {Home2} from '../pages/HomeCard2';
-import {Home3} from '../pages/HomeCard3';
-
-
+import { Home } from '../pages/Home';
+import { HomeCard2 } from '../pages/HomeCard2';
+import { HomeCard3 } from '../pages/HomeCard3';
 
 import card1 from '../assets/card1.png'
 import card2 from '../assets/card2.png'
 import card3 from '../assets/card3.png'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 
 const MAX_TRANSLATE_Y = -SCREEN_HEIGHT+50;
 
 const BottomSheet = () => {
-
   const navigation = useNavigation();
-
-  function handleChangeCharacter1(){
-    navigation.navigate('Home');
-}
-function handleChangeCharacter2(){
-  navigation.navigate('Home2');
-}
-function handleChangeCharacter3(){
-  navigation.navigate('Home3');
-}
-
+  const [vovo, setVovo] = useState<string>();
+  const [vovo2, setVovo2] = useState<string>();
+  const [teste, setTeste] = useState<string>();
 
   const translateY = useSharedValue(0);
 
@@ -61,6 +54,27 @@ function handleChangeCharacter3(){
       scrollTo(MAX_TRANSLATE_Y)
     }
   })
+  
+    function handleProfile(){
+    setVovo('normal');
+    navigation.navigate('Home');
+
+
+  }
+
+   function handleProfile2(){
+    setVovo('mc');
+    navigation.navigate('HomeCard2');
+
+  }
+
+   function handleProfile3(){
+    setVovo('pato');
+    navigation.navigate('HomeCard3');
+  }
+
+
+
 
   useEffect (() =>{
    scrollTo(-SCREEN_HEIGHT/3)
@@ -85,25 +99,30 @@ function handleChangeCharacter3(){
       <View style = {styles.line} />
       <View style={styles.cards}>
         
-        <TouchableOpacity onPress={handleChangeCharacter1}>
+        <TouchableOpacity onPress={handleProfile}>
         <Image source={card1} />
         </TouchableOpacity>
         
-        <TouchableOpacity onPress = 
-        {handleChangeCharacter2}>
+        <TouchableOpacity onPress={handleProfile2} >
         <Image source={card2} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={handleChangeCharacter3}>
+        <TouchableOpacity onPress={handleProfile3} >
         <Image source={card3} />
         </TouchableOpacity>
+
       </View>
+
     </Animated.View>
     </GestureDetector>
   )
 }
 
 export default BottomSheet
+
+
+
+
 
 const styles = StyleSheet.create({
 

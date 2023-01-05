@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     Image,
     
+    
 } from 'react-native';
 
 import { StatusBar } from 'expo-status-bar';
@@ -18,25 +19,34 @@ import fonts from '../styles/fonts';
 import { getPadTime } from '../components/getPadTime';
 import { AntDesign } from '@expo/vector-icons'; 
 import { Ionicons } from '@expo/vector-icons'; 
-import vovojuju2 from '../assets/Vovojuju2.png';
+import vovojojo1 from '../assets/Vovojuju1.png';
+import vovojojo2 from '../assets/Vovojuju2.png';
+import vovojojo3 from '../assets/Vovojuju3.png';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet from '../components/BottomSheet';
 import { useNavigation } from '@react-navigation/native';
+import { BackAvocadoCard2 } from './BackAvocadoCard2';
+import { FontAwesome } from '@expo/vector-icons'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { SurrenderCard2 } from './SurrenderCard2';
 
 
 
-
-export function Home2(){
+export function HomeCard2(){
 
     const navigation = useNavigation();
-        
 
-    function portal3(){
-        navigation.navigate('SurrenderCard2');
+
+    function whatIsAvocado(){
+        navigation.navigate('BackAvocadoCard2');
     }
 
+    const [vovo, setVovo] = useState<string>();
+
     const [range, setRange] = useState(0);
+
+    const [vovo2, setVovo2] = useState();
+    const [teste, setTeste] = useState();
 
     const [points, setPoints] = useState(0);
 
@@ -46,7 +56,16 @@ export function Home2(){
 
     const minutes = getPadTime(Math.floor((timeLeft/60)));
     const seconds = getPadTime(timeLeft-minutes*60);
-    
+
+    function clearAllData() {
+        AsyncStorage.getAllKeys()
+            .then(keys => AsyncStorage.multiRemove(keys))
+            .then(() => alert('success'));
+    }
+
+   
+
+ 
     useEffect(() =>{
         const interval = setInterval(()=>{
             isCounting &&
@@ -58,6 +77,8 @@ export function Home2(){
         };
     },[timeLeft ,isCounting]);
 
+    
+   
    const handleStart = () => {
     if(timeLeft === 0) setTimeLeft(range), setPoints(points +1);
     setIsCounting(true);
@@ -66,32 +87,15 @@ export function Home2(){
    const handleStop = () => {
 
     setIsCounting(false);
+    setPoints(points -1);
+    navigation.navigate('SurrenderCard2');
 
    };
 
-
-    return(
-        <GestureHandlerRootView style={{flex: 1}}>
-           
-        <SafeAreaView style={styles.container} >
-<View style={styles.abacate_Around}>
-            <TouchableOpacity onPress={portal3}>
-             <Image source={abacateRostoImg}></Image>
-             </TouchableOpacity>
-             <Text style = {styles.points}>{points}</Text>
-        </View>
-        
-        
-        <View>
-            <Image source={vovojuju2}></Image>
-        </View>
-        
-        <View style={styles.controls}>
-            <View style={styles.clock}>
-            <Text style={styles.numbers}>{ range/60 < 10 ? '0'+ range/60: range/60}</Text>
-            <Text style={styles.numbers}>:</Text>
-            <Text style={styles.numbers}>00</Text>
-            </View>
+   
+   function underClock(){
+    if(isCounting == false){
+        return(
         <View style={styles.slider}>
         <Slider
         style={{width: 300, height: 35}}
@@ -102,19 +106,80 @@ export function Home2(){
         minimumTrackTintColor='#628754'
         maximumTrackTintColor="#000000"
         thumbImage={abacateRostoImg}
-/>
-        <TouchableOpacity onPress = {handleStart}>
+/>        
+
+<TouchableOpacity onPress = {handleStart}>
             <Ionicons name="play" size={36} color="red" /> 
         </TouchableOpacity>
-                </View>
-                  
-            </View>
-            <BottomSheet />
+        </View>
+        )
+    }else{
+        return(
+            <View style={styles.stop}>
+        <TouchableOpacity onPress = {handleStop}>
+            <FontAwesome name="square" size={24} color="white" /> 
+        </TouchableOpacity>
+        </View>
+        )
+    }
+   }
 
+   function clockDisplay(){
+    if(isCounting == false){
+        return(
+            <View style={styles.clock}>
+            <Text style={styles.numbers}>{ range/60 < 10 ? '0'+ range/60: range/60}</Text>
+            <Text style={styles.numbers}>:</Text>
+            <Text style={styles.numbers}>00</Text>
+            </View>
+        )
+    }else{
+        return(
+            <View style={styles.clock}>
+            <Text style={styles.numbers}>{ minutes}</Text>
+            <Text style={styles.numbers}>:</Text>
+            <Text style={styles.numbers}>{seconds}</Text>
+            </View>
+        )
+    }
+   }
+
+ 
+
+    return(
+        <GestureHandlerRootView style={{flex: 1}}>
+           
+        <SafeAreaView style={styles.container} 
+        >
+        <View style={styles.abacate_Around}>
+            <TouchableOpacity onPress={whatIsAvocado}>
+             <Image source={abacateRostoImg}></Image>
+             </TouchableOpacity>
+             <Text style = {styles.points}>{points}</Text>
+        </View>
+            
+        <View>
+                <Image source={vovojojo2}></Image>
+        </View>
+        
+        <View style={styles.controls}>
+            <View>
+            {clockDisplay()}
+            </View>
+            
+        <View>
+        {underClock()}
+        </View>
+
+        </View>
+            
+            <BottomSheet />
+            
 </SafeAreaView>
        </GestureHandlerRootView>
-  )
-}
+  );
+
+};
 
 const styles = StyleSheet.create({
 
@@ -164,7 +229,16 @@ const styles = StyleSheet.create({
         paddingHorizontal:25
         
     },
-
+    stop:{
+        marginTop:20,
+        marginLeft:45,
+        alignItems:'center',
+        justifyContent:'center',
+        width:56,
+        height:56,
+        backgroundColor:"#FF0000",
+        borderRadius:28,
+    }
   
 
 });

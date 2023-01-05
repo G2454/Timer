@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import UpperSheet from '../components/UpperSheet';
+import SurrenderAlert from '../components/SurrenderAlert';
 import colors from '../styles/colors';
 
 export function Surrender(){
@@ -9,7 +9,7 @@ export function Surrender(){
         <GestureHandlerRootView style={{flex:1}}>
         <View style={styles.container}>
 
-        <UpperSheet/>  
+        <SurrenderAlert/>  
         </View>
         </GestureHandlerRootView>
     )

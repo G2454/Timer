@@ -1,15 +1,15 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import SurrenderAlertCard2 from '../components/SurrenderAlertCard2';
+import UpperSheet from '../components/UpperSheetCard2';
 import colors from '../styles/colors';
 
-export function SurrenderCard2(){
+export function BackAvocadoCard2(){
     return(
         <GestureHandlerRootView style={{flex:1}}>
         <View style={styles.container}>
 
-        <SurrenderAlertCard2/>  
+        <UpperSheet/>  
         </View>
         </GestureHandlerRootView>
     )

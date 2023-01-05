@@ -17,7 +17,7 @@ import { CardStyleInterpolators } from '@react-navigation/stack';
 import fonts from '../styles/fonts';
 import { Feather } from '@expo/vector-icons'; 
 import { useNavigation } from '@react-navigation/native';
-import {Home3} from '../pages/HomeCard3';
+import {HomeCard3} from '../pages/HomeCard3';
 
     
 
@@ -31,7 +31,7 @@ const UpperSheetCard3 = () => {
   const navigation = useNavigation();
 
   function goHome(){
-    navigation.navigate('Home3');
+    navigation.navigate('HomeCard3');
   }
 
   const translateY = useSharedValue(0);
