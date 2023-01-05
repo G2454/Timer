@@ -49,17 +49,12 @@ export function Home(){
     const [teste, setTeste] = useState();
 
     const [points, setPoints] = useState(0);
-
-    const handleStop = () => {
-
-        setIsCounting(false);
-        setPoints(points -1);
-        setRange(0);
-        navigation.navigate('Surrender');
-    
-       };
-
     const [timeLeft, setTimeLeft] = useState(range);
+    
+    useEffect(()=>{
+        setTimeLeft(range);
+    },[range])
+    
 
     const [isCounting, setIsCounting] = useState(false);
 
@@ -91,6 +86,15 @@ export function Home(){
    const handleStart = () => {
     if(timeLeft === 0) setTimeLeft(range), setPoints(points +1);
     setIsCounting(true);
+
+   };
+
+   const handleStop = () => {
+
+    setIsCounting(false);
+    setPoints(points -1);
+    setRange(0);
+    navigation.navigate('Surrender');
 
    };
    
