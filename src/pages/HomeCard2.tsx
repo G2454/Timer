@@ -63,7 +63,9 @@ export function HomeCard2(){
             .then(() => alert('success'));
     }
 
-   
+    useEffect(()=>{
+        setTimeLeft(range);
+    },[range])
 
  
     useEffect(() =>{

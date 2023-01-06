@@ -7,7 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Button } from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
 import {Home} from '../pages/Home';
-
+import { Login } from './Login';
 /////////////
 import { firebase } from '../../config';
 
@@ -25,6 +25,9 @@ export function Register(){
     const [password, setPassword] = useState('');
    
 
+    function goHome(){
+        navigation.navigate('Login');
+    }
 
     const registerUser = async (email, password) =>{
         
@@ -47,7 +50,9 @@ export function Register(){
             
            
             <View>
+                <TouchableOpacity onPress={goHome}>
             <Text style={styles.cancel}>Cancelar</Text>
+            </TouchableOpacity>
                 <Image source={abacateRostoImg} style={styles.image}></Image>
                 <Text style={styles.title}>Crie sua conta</Text>
             </View >
@@ -91,8 +96,9 @@ export function Register(){
 
                
                 <View>
+                    <TouchableOpacity onPress={goHome}>
                     <Text style={styles.remember}>Já tenho uma conta</Text>
-                    
+                    </TouchableOpacity>
                 </View>
             </View>
             

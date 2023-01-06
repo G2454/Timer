@@ -41,6 +41,13 @@ export function Home(){
         navigation.navigate('BackAvocado');
     }
 
+    
+
+    function loseAvocado(){
+        navigation.navigate('Surrender');
+        setPoints(points - 1);
+    }
+
     const [vovo, setVovo] = useState<string>();
 
     const [range, setRange] = useState(0);
@@ -53,9 +60,9 @@ export function Home(){
     const handleStop = () => {
 
         setIsCounting(false);
-        setPoints(points -1);
         setRange(0);
-        navigation.navigate('Surrender');
+        loseAvocado();
+        
     
        };
 
@@ -72,7 +79,9 @@ export function Home(){
             .then(() => alert('success'));
     }
 
-   
+    useEffect(()=>{
+        setTimeLeft(range);
+    },[range])
 
  
     useEffect(() =>{
