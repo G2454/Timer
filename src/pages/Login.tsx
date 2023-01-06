@@ -1,20 +1,90 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, Text, Image, SafeAreaView, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import abacateRostoImg from '../assets/abacate_icon.png';
 import colors from '../styles/colors';
 import fonts from '../styles/fonts';
 import { Button } from '../components/Button';
 import { color } from 'react-native-reanimated';
+import { Home } from './Home';
+
+/////////////////////////
+
+import { NavigationContainer} from '@react-navigation/native';
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+import { firebase } from '../../config';
+
+
+//////////////////////////////////////////
 
 
 export function Login(){
     
+    const [user, setUser] = useState(null);
+    
+    ////////////////////
+
+    const [initializing, setInitializing] = useState(true);
+
+
+    /////////////////////
+
+    const [email, setEmail] = useState<string>();
+
+    const [password, setPassword] = useState<string>();
+
+
+
     const navigation = useNavigation();
 
     function handleStart(){
         navigation.navigate('Register');
     }
+
+    ///////////////////////
+
+    function onAuthStateChanged(user){
+        setUser(user);
+        if(initializing) setInitializing(false);
+    }
+
+    useEffect(()=>{
+        const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber
+    }, []);
+
+    if(initializing) return null;
+
+
+    ////////////////////////
+
+
+
+    //////////////////////////
+
+    const loginUser = async (email, password) =>{
+        try{
+            await firebase.auth().signInWithEmailAndPassword(email, password)
+            
+            navigation.navigate('Home');
+            alert('Login feito com sucesso')
+            
+        } catch(error){
+            alert('Usuário não cadastrado')
+        }
+    }
+
+
+
+
+
+
+
+    ///////////////////////////
+
+
 
 
     return(
@@ -24,14 +94,19 @@ export function Login(){
                 <Text style={styles.title}>Faça seu login para {'\n'}começar</Text>
             </View >
             <View style={styles.form}>
-                <TextInput style={styles.input} placeholder='Email' />
-                <TextInput style={styles.input} placeholder='Senha' />
+                <TextInput style={styles.input} placeholder='Email'
+                onChangeText={email => setEmail(email)}
+                />
+                <TextInput style={styles.input} placeholder='Senha' 
+                onChangeText={password => setPassword(password)}
+                secureTextEntry
+                />
 
                 <View style={styles.footer}>
                 
                 <Button
                 title={'Entrar'}
-                
+                onPress={() => loginUser(email, password)}
                 />
 
                 </View>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, Text, Image, SafeAreaView, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 import abacateRostoImg from '../assets/abacate_icon.png';
 import colors from '../styles/colors';
@@ -8,6 +8,10 @@ import { Button } from '../components/Button';
 import { useNavigation } from '@react-navigation/native';
 import {Home} from '../pages/Home';
 
+/////////////
+import { firebase } from '../../config';
+
+
 
 
 export function Register(){
@@ -16,6 +20,22 @@ export function Register(){
     const [hidePass, setHidePass]= useState(false);
 
     const navigation = useNavigation();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+   
+
+
+    const registerUser = async (email, password) =>{
+        
+        try{
+        await firebase.auth().createUserWithEmailAndPassword(email,password)
+        handleStart()
+        alert('Usuário cadastrado com sucesso')
+        }catch(error){
+            alert(error)
+        }
+    }
 
     function handleStart(){
         navigation.navigate('Home');
@@ -33,16 +53,24 @@ export function Register(){
             </View >
             <View style={styles.form}>
                 <TextInput style={styles.input} placeholder='Nome do Usuário' />
-                <TextInput style={styles.input} placeholder='Email' />
+                <TextInput style={styles.input} placeholder='Email' 
+                onChangeText={(email) => setEmail(email)}
+                autoCorrect={false}
+                autoCapitalize='none'
+                keyboardType='email-address'
+                />
                 
                 <View style={styles.inputArea}>
-                <TextInput style={styles.password} placeholder='Senha'
-                value={input}
-                onChangeText={(texto) =>setInput(texto)}
+                <TextInput style={styles.senha} placeholder='Senha'
+                
+                onChangeText={(password) =>setPassword(password)}
+                
+                autoCapitalize='none'
+                autoCorrect={false}
                 secureTextEntry={hidePass}
                  />
 
-                <TouchableOpacity style={styles.icon}
+<TouchableOpacity style={styles.icon}
                 onPress={()=> setHidePass(!hidePass)}>
                     {hidePass ?
                 <Ionicons name="eye" color="#000" size={25}/> 
@@ -50,6 +78,7 @@ export function Register(){
                 <Ionicons name="eye-off" color="#000" size={25}/>
             }           
                     </TouchableOpacity>
+                
                 </View>
 
                 </View>
@@ -57,12 +86,13 @@ export function Register(){
                 <View style={styles.button}>
                 <Button
                 title={'Cadastrar'}
-                onPress={handleStart}
+                onPress={()=> registerUser(email,password)}
                 />
 
                
                 <View>
                     <Text style={styles.remember}>Já tenho uma conta</Text>
+                    
                 </View>
             </View>
             
@@ -130,7 +160,7 @@ const styles = StyleSheet.create({
         marginRight:300,
         marginTop:60
     },
-    password:{
+    senha:{
         width:"85%",
        
         
