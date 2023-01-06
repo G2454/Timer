@@ -14,14 +14,13 @@ O timer foi desenvolvido com React Native (Front-End), Firebase (Login/Registro)
 
 ## Mídia - Tela de Registro
 
-<p align="center">
-![register](https://user-images.githubusercontent.com/70035129/210968641-23f51fb4-6366-441f-a2ff-f8b675523b68.gif) </p>
+![register](https://user-images.githubusercontent.com/70035129/210968641-23f51fb4-6366-441f-a2ff-f8b675523b68.gif) 
 
 
 ## Mídia - Tela de Login e resto do aplicativo
 
-<p align="center">
-![login](https://user-images.githubusercontent.com/70035129/210968560-135b2241-69a0-441c-ba35-e2d2b24465da.gif) </p>
+
+![login](https://user-images.githubusercontent.com/70035129/210968560-135b2241-69a0-441c-ba35-e2d2b24465da.gif) 
 
 
 
