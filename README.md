@@ -13,7 +13,7 @@ Timer estilizado desenvolvido em React Native
 O timer foi desenvolvido com React Native (Front-End), Firebase (Login/Registro),  Expo (Android).
 <br>
 <br>
-**É preciso colocar as seguintes informações no config.js para que o aplicativo funcione:
+**É preciso colocar as seguintes informações no config.js em firebaseConfig para que o aplicativo funcione:
 <br>
 <br>
     *  apiKey: 
