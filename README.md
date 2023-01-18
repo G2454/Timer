@@ -10,7 +10,8 @@ Timer estilizado desenvolvido em React Native
 
 ## Projeto
 
-O timer foi desenvolvido com React Native (Front-End), Firebase (Login/Registro),  Expo (Android)
+O timer foi desenvolvido com React Native (Front-End), Firebase (Login/Registro),  Expo (Android).
+É preciso configurar o arquivo config.js para que o aplicativo funcione.  
 
 ## Mídia - Tela de Registro
 
